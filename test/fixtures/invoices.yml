@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  total: 1.5
+  issue_date: 2020-08-25
+  due_date: 2020-08-25
+  paid: false
+  description: MyString
+  amount: 1
+  price: 1.5
+  customer: one
+
+two:
+  total: 1.5
+  issue_date: 2020-08-25
+  due_date: 2020-08-25
+  paid: false
+  description: MyString
+  amount: 1
+  price: 1.5
+  customer: two
