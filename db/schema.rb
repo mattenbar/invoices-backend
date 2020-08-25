@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_25_180354) do
+ActiveRecord::Schema.define(version: 2020_08_25_185950) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,4 +22,19 @@ ActiveRecord::Schema.define(version: 2020_08_25_180354) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "invoices", force: :cascade do |t|
+    t.float "total"
+    t.date "issue_date"
+    t.date "due_date"
+    t.boolean "paid"
+    t.string "description"
+    t.integer "amount"
+    t.float "price"
+    t.bigint "customer_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id"], name: "index_invoices_on_customer_id"
+  end
+
+  add_foreign_key "invoices", "customers"
 end
