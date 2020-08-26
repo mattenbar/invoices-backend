@@ -1,4 +1,5 @@
 class Api::V1::InvoicesController < ApplicationController
+  
 
   def index
     invoices = Invoice.all
@@ -9,7 +10,7 @@ class Api::V1::InvoicesController < ApplicationController
   def create
     invoice = Invoice.new(invoice_params)
     if invoice.save
-      render json: invoices
+      render json: invoice
     else
       render json: {error: 'Unable to creat invoice'}
     end
@@ -28,8 +29,9 @@ class Api::V1::InvoicesController < ApplicationController
 
   private
 
+
   def invoice_params
-    params.require(:invoice).permit(:total, :issue_date, :due_date, :paid, :description, :amount, :price)
+    params.require(:invoice).permit(:customer_id, :total, :issue_date, :due_date, :paid, :description, :amount, :price)
   end
 
 end

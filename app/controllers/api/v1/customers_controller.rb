@@ -1,7 +1,8 @@
 class Api::V1::CustomersController < ApplicationController
 
   def index
-
+    customers = Customer.all
+    render json: customers
   end
 
   def create
@@ -17,7 +18,7 @@ class Api::V1::CustomersController < ApplicationController
   end
 
   def customer_params
-    params.require(:customer).permit(:id, :name, :email)
+    params.require(:customer).permit(:name, :email)
   end
 
 end
