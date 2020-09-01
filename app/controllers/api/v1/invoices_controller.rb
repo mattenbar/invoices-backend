@@ -3,14 +3,15 @@ class Api::V1::InvoicesController < ApplicationController
 
   def index
     invoices = Invoice.all
-    render json: invoices
+    render json: {invoice: InvoiceSerializer.new(invoices)}
 
   end
 
   def create
     invoice = Invoice.new(invoice_params)
+    invoice.total = invoice.amount * invoice.price
     if invoice.save
-      render json: invoice
+      render json: {invoice: InvoiceSerializer.new(invoice)}
     else
       render json: {error: 'Unable to creat invoice'}
     end
@@ -19,12 +20,15 @@ class Api::V1::InvoicesController < ApplicationController
 
   def show
     invoice = Invoice.find(params[:id])
-    render json: invoice
+    render json: {invoice: InvoiceSerializer.new(invoice)}
   end
 
   def destroy
     invoice = Invoice.find(params[:id])
     invoice.destroy
+    invoices = Invoice.all
+    render json: {invoice: InvoiceSerializer.new(invoices)}
+
   end
 
   private
