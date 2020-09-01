@@ -24,6 +24,13 @@ class Api::V1::InvoicesController < ApplicationController
     render json: {invoice: InvoiceSerializer.new(invoice)}
   end
 
+  def update
+    invoice = Invoice.find(params[:id])
+    invoice.update(invoice_params)
+    invoices = Invoice.all
+    render json: {invoice: InvoiceSerializer.new(invoices)}
+  end
+
   def destroy
     invoice = Invoice.find(params[:id])
     invoice.destroy
@@ -36,7 +43,7 @@ class Api::V1::InvoicesController < ApplicationController
 
 
   def invoice_params
-    params.require(:invoice).permit(:customer_id, :total, :issue_date, :due_date, :paid, :description, :amount, :price)
+    params.require(:invoice).permit(:id, :customer_id, :total, :issue_date, :due_date, :paid, :description, :amount, :price)
   end
 
 end
