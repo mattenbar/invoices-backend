@@ -10,6 +10,7 @@ class Api::V1::InvoicesController < ApplicationController
   def create
     invoice = Invoice.new(invoice_params)
     invoice.total = invoice.amount * invoice.price
+    invoice.paid = false
     if invoice.save
       render json: {invoice: InvoiceSerializer.new(invoice)}
     else
